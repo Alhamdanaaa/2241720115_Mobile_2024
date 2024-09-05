@@ -9,7 +9,7 @@ void main() {
   }
 }
 ```
-![Output program soal 1](../pertemuan02/assets/output.png)
+![Output program soal 1](assets/output.png)
 
 # Soal 2
 Mengapa sangat penting untuk memahami bahasa pemrograman Dart sebelum kita menggunakan framework Flutter ? Jelaskan!
