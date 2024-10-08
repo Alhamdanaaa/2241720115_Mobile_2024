@@ -7,17 +7,17 @@ import 'package:flutter/material.dart';
 import 'package:belanja/widgets/footer.dart'; // Pastikan ini sesuai dengan lokasi footer
 
 class ItemPage extends StatelessWidget {
-  const ItemPage({Key? key, required Item item}) : super(key: key);
-
-  static const routeName = '/item';
+  final Item item;
+  const ItemPage({Key? key, required this.item}) : super(key: key);
+  // static const routeName = '/item';
 
   @override
   Widget build(BuildContext context) {
-    final itemArgs = ModalRoute.of(context)!.settings.arguments as Item;
+    // final item = ModalRoute.of(context)!.settings.arguments as Item;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(itemArgs.name),
+        title: Text(item.name),
         backgroundColor: Theme.of(context).primaryColor,
       ),
       body: SingleChildScrollView(
@@ -25,11 +25,11 @@ class ItemPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Hero(
-              tag: 'hero-${itemArgs.name}',
+              tag: 'hero-${item.name}',
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15),
                 child: Image.asset(
-                  itemArgs.imagePath,
+                  item.imagePath,
                   height: 300,
                   fit: BoxFit.cover,
                 ),
@@ -41,7 +41,7 @@ class ItemPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    itemArgs.name,
+                    item.name,
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
@@ -51,7 +51,7 @@ class ItemPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    'Rp${itemArgs.price}',
+                    'Rp${item.price}',
                     style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.w600,
@@ -61,7 +61,7 @@ class ItemPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    'Stock: ${itemArgs.stock}',
+                    'Stock: ${item.stock}',
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.grey[700],
@@ -75,7 +75,7 @@ class ItemPage extends StatelessWidget {
                       Icon(Icons.star_outlined, color: Colors.amber, size: 24),
                       const SizedBox(width: 5),
                       Text(
-                        '${itemArgs.rating}',
+                        '${item.rating}',
                         style: TextStyle(
                           fontSize: 18,
                           color: Theme.of(context).colorScheme.secondary,

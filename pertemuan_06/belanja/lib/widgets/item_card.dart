@@ -1,6 +1,7 @@
 import 'package:belanja/models/item.dart';
 import 'package:flutter/material.dart';
 import 'package:belanja/pages/item_page.dart';
+import 'package:go_router/go_router.dart';
 
 class ItemCard extends StatelessWidget {
   final Item item;
@@ -10,11 +11,7 @@ class ItemCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(
-          context,
-          ItemPage.routeName,
-          arguments: item,
-        );
+        context.push('/item', extra: item);
       },
       child: Card(
         elevation: 5,

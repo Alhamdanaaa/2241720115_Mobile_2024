@@ -1,3 +1,4 @@
+import 'package:belanja/models/item.dart';
 import 'package:belanja/pages/home_page.dart';
 import 'package:belanja/pages/item_page.dart';
 import 'package:flutter/material.dart';
@@ -14,9 +15,25 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  final GoRouter _router = GoRouter(
+    routes: [
+      GoRoute(
+        path: '/',
+        builder: (context, state) => HomePage(),
+      ),
+      GoRoute(
+        path: '/item',
+        builder: (context, state) {
+          final item = state.extra as Item;
+          return ItemPage(item: item);
+        },
+      ),
+    ],
+  );
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: _router,
       title: 'Aplikasi Belanja',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -31,11 +48,13 @@ class MyApp extends StatelessWidget {
           bodyLarge: TextStyle(fontSize: 16, color: Colors.black),
         ),
       ),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => HomePage(),
-        '/item': (context) => ItemPage(),
-      },
+      // initialRoute: '/',
+      // routes: {
+        // '/': (context) => HomePage(),
+        // '/item': (context) => ItemPage(),
+      // },
+      
+      
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:belanja/models/item.dart';
 import 'package:belanja/Widgets/item_card.dart'; 
 import 'package:belanja/Widgets/footer.dart'; 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 // class HomePage extends StatelessWidget {
 //   @override
 //   Widget build(BuildContext context) {
@@ -41,7 +42,13 @@ class HomePage extends StatelessWidget {
               itemCount: items.length,
               itemBuilder: (context, index) {
                 final item = items[index];
-                return ItemCard(item: item); // Panggil ItemCard di sini
+                return InkWell(
+                  onTap: () {
+                    context.push('/item', extra: item); // Navigasi menggunakan go_router
+                  },
+                  child: ItemCard(item: item),
+                );
+                // return ItemCard(item: item); // Panggil ItemCard di sini
               },
             ),
           ),
