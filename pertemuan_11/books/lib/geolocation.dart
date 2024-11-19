@@ -9,29 +9,41 @@ class LocationScreen extends StatefulWidget {
 }
 
 class _LocationScreenState extends State<LocationScreen> {
+  Future<Position>? position;
   String myPosition = '';
   @override
   void initState() {
     super.initState();
-    getPosition().then((Position myPos){
-      myPosition = 'Latitude: ${myPos.latitude.toString()} - Longitude: ${myPos.longitude.toString()}';
-      setState((){
-        myPosition = myPosition;
-      });
-    });
+    position = getPosition();
+    // getPosition().then((Position myPos){
+    //   myPosition = 'Latitude: ${myPos.latitude.toString()} - Longitude: ${myPos.longitude.toString()}';
+    //   setState((){
+    //     myPosition = myPosition;
+    //   });
+    // });
   }
+
   @override
   Widget build(BuildContext context) {
-    final myWidget = myPosition == ''
-    ? const CircularProgressIndicator()
-    : Text(myPosition);
+    final myWidget =
+        myPosition == '' ? const CircularProgressIndicator() : Text(myPosition);
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Location Alhamdana'),
       ),
       body: Center(
-        child: myWidget,
+        child: FutureBuilder(
+            future: position,
+            builder: (BuildContext context, AsyncSnapshot<Position> snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const CircularProgressIndicator();
+              } else if (snapshot.connectionState == ConnectionState.done) {
+                return Text(snapshot.data.toString());
+              } else {
+                return const Text('Error');
+              }
+            }),
       ),
     );
     // return Scaffold(
@@ -43,12 +55,13 @@ class _LocationScreenState extends State<LocationScreen> {
     //   ),
     // );
   }
+
   Future<Position> getPosition() async {
-    Future.delayed(const Duration(seconds: 3));
-    await Geolocator.requestPermission();
+    // Future.delayed(const Duration(seconds: 3));
+    // await Geolocator.requestPermission();
     await Geolocator.isLocationServiceEnabled();
-    Position? position = 
-      await Geolocator.getCurrentPosition();
+    await Future.delayed(const Duration(seconds: 3));
+    Position position = await Geolocator.getCurrentPosition();
     return position;
   }
 }
