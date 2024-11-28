@@ -120,18 +120,3 @@ Menggunakan StreamBuilder untuk menampilkan data dari stream. Jika ada data baru
 Praktikum ini membahas penerapan pola BLoC pada Flutter untuk menciptakan aplikasi yang lebih terstruktur dan mudah dikelola. Dengan pola BLoC, logika bisnis dipisahkan dari tampilan, sehingga pengembangan dan pemeliharaan aplikasi menjadi lebih efisien. Dalam praktik ini, pola BLoC digunakan untuk menghasilkan angka acak. Kelas RandomBloc bertugas menyediakan aliran data untuk angka acak, sementara kelas RandomScreen bertugas menampilkan angka tersebut. Tombol refresh pada RandomScreen digunakan untuk memicu fungsi generateRandom() di kelas RandomBloc, yang menghasilkan angka acak baru. Praktikum ini secara keseluruhan menunjukkan bagaimana pola BLoC dapat meningkatkan organisasi dalam pengembangan aplikasi Flutter.
 ### Capture hasil praktikum Anda berupa GIF dan lampirkan di README.
 ![Hasil gambar](assets/13.gif)
-
-
-
-### Tambahkan nama panggilan Anda pada title app sebagai identitas hasil pekerjaan Anda.
-![Hasil gambar](assets/1.gif)
-## Soal 2
-### Carilah judul buku favorit Anda di Google Books, lalu ganti ID buku pada variabel path di kode tersebut.
-```dart
-Future<Response> GetData() async{
-    const authority = 'www.googleapis.com';
-    const path = '/books/v1/volumes/736zEAAAQBAJ';
-    Uri url = Uri.https(authority, path);
-    return http.get(url);
-  }
-```
